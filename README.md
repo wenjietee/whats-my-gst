@@ -10,7 +10,7 @@ A web app for calculating GST and service charge in Singapore.
 
 ---
 
-https://wenjietee.github.io/whatsmygst/
+https://wenjietee.github.io/whats-my-gst/
 
 ## API Used:
 
@@ -25,5 +25,3 @@ https://data.gov.sg/
 ## Screenshots
 
 ---
-
-## Wireframe
