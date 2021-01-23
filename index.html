@@ -10,34 +10,41 @@
 		></script>
 		<script src="app.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="styles.css" />
-		<title>Calculator</title>
+		<title>What's My GST?</title>
 	</head>
 	<body>
-		<div class="flex" id="calculator-container">
-			<div id="display-container">
-				<div>
-					<button id="clear">C</button>
-					<div id="value"></div>
-				</div>
+		<div class="flex app" id="app-container">
+			<div class="flex input">
+				<h1>What's My GST?</h1>
+				<h3>Before GST:</h3>
+				<h3 class='input'>Enter Amount</h3>
 			</div>
-			<div class="flex" id="buttons-container">
-				<button class="keypad">7</button>
-				<button class="keypad">8</button>
-				<button class="keypad">9</button>
-				<button class="keypad">/</button>
-				<button class="keypad">4</button>
-				<button class="keypad">5</button>
-				<button class="keypad">6</button>
-				<button class="keypad">*</button>
+			<div class="flex output">
+				<h3>After GST:</h3>
+				<h3 class='output'>$0.00</h1>
+				<button class="copy">Copy</button>
+			<div class="flex checkbox">
+				<input type="checkbox" id="gst" name="gst" checked>
+		 		<label for="gst">GST</label>
+				 <input type="checkbox" id="svcchg" name="svcchg">
+				  <label for="svcchg">Service Charge</label>
+			</div>
+			</div>
+			<div class="flex buttons">
 				<button class="keypad">1</button>
 				<button class="keypad">2</button>
 				<button class="keypad">3</button>
-				<button class="keypad">-</button>
-				<button class="keypad">0</button>
+				<button class="keypad">4</button>
+				<button class="keypad">5</button>
+				<button class="keypad">6</button>
+				<button class="keypad">7</button>
+				<button class="keypad">8</button>
+				<button class="keypad">9</button>
 				<button class="keypad">.</button>
-				<button id="equal">=</button>
-				<button class="keypad">+</button>
+				<button class="keypad">0</button>
+				<button class="keypad" id="delete">del</button>
 			</div>
+			<button class="calculate">Calculate</button>
 		</div>
 	</body>
 </html>
