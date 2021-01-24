@@ -1,13 +1,30 @@
+// define percentage
+const PERCENT = 0.01;
+
 // app Data
 const appData = {
 	// user values
-	myAmount: 0,
-	myTotal: 0,
-	myGstAmount: 0,
-	myServiceChargeAmount: 0,
+	amount: 0,
+	total: 0,
+	gstAmount: 0,
+	serviceChargeAmount: 0,
 	// gst and service charge rates
 	gstRate: 0,
 	serviceCharge: 10,
+
+	// methods
+	calculateMyServiceCharge() {
+		this.serviceChargeAmount = this.amount * (this.serviceCharge * PERCENT);
+	},
+
+	calculateMyGST() {
+		this.gstAmount =
+			(this.amount + this.serviceChargeAmount) * (this.gstRate * PERCENT);
+	},
+
+	calculateTotal() {
+		this.total = this.amount + this.serviceChargeAmount + this.gstAmount;
+	},
 };
 
 // ajax
@@ -28,11 +45,6 @@ const ajaxGetGST = () => {
 		};
 };
 
-// calculate GST , service charge
-const calculateMyServiceCharge = () => {};
-
-const calculateMyGST = () => {};
-
 // remove last value (backspace)
 const removeLastValue = () => {};
 
@@ -40,4 +52,17 @@ const removeLastValue = () => {};
 $(() => {
 	//test ajax
 	ajaxGetGST();
+
+	//test calculate methods
+	appData.amount = 10;
+	appData.gstRate = 7;
+
+	appData.calculateMyServiceCharge();
+	console.log(appData.serviceChargeAmount); // expect 1
+
+	appData.calculateMyGST();
+	console.log(appData.gstAmount); //expect 0.77
+
+	appData.calculateTotal();
+	console.log(appData.total); //expect 11.77
 });
