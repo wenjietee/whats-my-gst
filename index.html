@@ -17,12 +17,12 @@
 			<div class="flex input">
 				<h1>What's My GST?</h1>
 				<h3>Before GST:</h3>
-				<h3 class='input'>Enter Amount</h3>
+				<h3>$ <span id='before'>0</span></h3>
 			</div>
 			<div class="flex output">
 				<h3>After GST:</h3>
-				<h3 class='output'>$0.00</h1>
-				<button class="copy">Copy</button>
+				<h3 class>$ <span id='after'>0</span></h1>
+				<button id="copy">Copy</button>
 			<div class="flex checkbox">
 				<input type="checkbox" id="gst" name="gst" checked>
 		 		<label for="gst">GST</label>
@@ -42,9 +42,9 @@
 				<button class="keypad">9</button>
 				<button class="keypad">.</button>
 				<button class="keypad">0</button>
-				<button class="keypad" id="delete">del</button>
+				<button id="delete">del</button>
 			</div>
-			<button class="calculate">Calculate</button>
+			<button id="calculate">Calculate</button>
 		</div>
 	</body>
 </html>

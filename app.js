@@ -3,6 +3,8 @@ const PERCENT = 0.01;
 
 // app Data
 const appData = {
+	//display values
+	displayAmount: '',
 	// user values
 	amount: 0,
 	total: 0,
@@ -25,6 +27,15 @@ const appData = {
 	calculateTotal() {
 		this.total = this.amount + this.serviceChargeAmount + this.gstAmount;
 	},
+
+	// setters
+	setAmount(value) {
+		this.amount = Number(value);
+	},
+
+	setGSTRate(value) {
+		this.gstRate = value;
+	},
 };
 
 // ajax
@@ -38,7 +49,8 @@ const ajaxGetGST = () => {
 	}).then((data) => {
 		//get current gst data
 		const currentGST = data.result.records[data.result.records.length - 1];
-		console.log(currentGST.tax_rate);
+		// console.log(currentGST.tax_rate);
+		appData.setGSTRate(currentGST);
 	}),
 		() => {
 			console.log('bad request');
@@ -50,19 +62,26 @@ const removeLastValue = () => {};
 
 // start prog
 $(() => {
+	//keypad events
+	$('.keypad').on('click', (event) => {
+		$('#before').empty();
+		appData.displayAmount += $(event.currentTarget).text();
+		$('#before').text(appData.displayAmount);
+		appData.setAmount(appData.displayAmount);
+	});
+
+	// delete event
+	$('#delete').on('click', (event) => {});
+
+	//calculate event
+	$('#copy').on('click', () => {});
+
+	//copy event
+	$('#calculate').on('click', () => {});
+
 	//test ajax
 	ajaxGetGST();
-
-	//test calculate methods
-	appData.amount = 10;
-	appData.gstRate = 7;
-
-	appData.calculateMyServiceCharge();
-	console.log(appData.serviceChargeAmount); // expect 1
-
-	appData.calculateMyGST();
-	console.log(appData.gstAmount); //expect 0.77
-
-	appData.calculateTotal();
-	console.log(appData.total); //expect 11.77
+	console.log(appData.gstRate);
 });
+
+// to limit one decimal per entry
