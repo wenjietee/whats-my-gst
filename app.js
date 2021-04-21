@@ -77,10 +77,8 @@ $(() => {
 
 		// copy event
 		$('#calculate').on('click', () => {});
-	}),
-		() => {
-			console.log('bad request');
-		};
+	}).catch((error) =>{
+		console.log('Bad request.')})
 });
 
 // to limit one decimal per entry
