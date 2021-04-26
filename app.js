@@ -35,7 +35,6 @@ const app = {
 	calculateTotal() {
 		this.total = this.amount + this.serviceChargeAmount + this.gstAmount;
 	},
-	removeLastValue() {},
 
 	// setters
 	setAmount(value) {
@@ -43,6 +42,14 @@ const app = {
 	},
 	setGSTRate(value) {
 		this.gstRate = value;
+	},
+
+	// getters
+	getGSTRate() {
+		return this.gstRate;
+	},
+	getServiceCharge() {
+		return this.serviceCharge;
 	},
 };
 
@@ -54,31 +61,24 @@ $(() => {
 	$.ajax({
 		// get gst from data.gov.sg
 		url: `https://data.gov.sg/api/action/datastore_search?resource_id=${GST_RESOURCE_ID}`,
-	}).then((data) => {
-		// get current gst data
-		const currentGSTRate =
-			data.result.records[data.result.records.length - 1].tax_rate;
-		// set app with latest gst rate
-		app.setGSTRate(currentGSTRate);
+	})
+		.then((data) => {
+			// get current gst data
+			const currentGSTRate =
+				data.result.records[data.result.records.length - 1].tax_rate;
+			// set app with latest gst rate
+			app.setGSTRate(currentGSTRate);
 
-		// keypad events
-		$('.keypad').on('click', (event) => {
-			$('#before').empty();
-			app.displayAmount += $(event.currentTarget).text();
-			$('#before').text(app.displayAmount);
-			app.setAmount(app.displayAmount);
+			// display gst and service charge rate
+			$('#gst-rate').text(app.getGSTRate());
+			$('#svc-rate').text(app.getServiceCharge());
+
+			// calculate event
+			$('#calculate').on('click', () => {});
+		})
+		.catch((error) => {
+			console.log('Bad request.');
 		});
-
-		// delete event
-		$('#delete').on('click', (event) => {});
-
-		//  calculate event
-		$('#copy').on('click', () => {});
-
-		// copy event
-		$('#calculate').on('click', () => {});
-	}).catch((error) =>{
-		console.log('Bad request.')})
 });
 
 // to limit one decimal per entry

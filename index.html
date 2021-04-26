@@ -50,7 +50,7 @@
 							value="gst"
 							checked
 						/>
-						<span>GST</span>
+						<span>GST (<span id="gst-rate"></span>%)</span>
 					</label>
 				</div>
 				<div class="six columns">
@@ -62,11 +62,13 @@
 							value="svc"
 							checked
 						/>
-						<span>Service Charge</span>
+						<span
+							>Service Charge (<span id="svc-rate"></span>%)</span
+						>
 					</label>
 				</div>
 			</div>
-			<button class="button-primary">Calculate</button>
+			<button class="button-primary" id="calculate">Calculate</button>
 
 			<div class="row">
 				<div class="twelve columns">
