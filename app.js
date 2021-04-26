@@ -43,32 +43,34 @@ const app = {
 		this.allChargesAmount = this.gstAmount + this.serviceChargeAmount;
 	},
 
+	resetCalculatedValues() {
+		this.total = 0;
+		this.gstAmount = 0;
+		this.serviceChargeAmount = 0;
+		this.allChargesAmount = 0;
+	},
+
 	// setters
 	setAmount(value) {
 		this.amount = Number(value);
 	},
-	setGSTRate(value) {
+	setGstRate(value) {
 		this.gstRate = value;
 	},
 
 	// getters
-	getGSTRate() {
-		return this.gstRate;
+	getRates() {
+		return { gst: this.gstRate, svc: this.serviceCharge };
 	},
-	getServiceCharge() {
-		return this.serviceCharge;
-	},
-	getTotal() {
-		return this.total;
-	},
-	getGstChargeAmount() {
-		return this.gstAmount;
-	},
-	getServiceChargeAmount() {
-		return this.serviceChargeAmount;
-	},
-	getAllChargesAmount() {
-		return this.allChargesAmount;
+
+	getAllValues() {
+		return {
+			amount: this.amount,
+			gst: this.gstAmount,
+			serviceCharge: this.serviceChargeAmount,
+			allCharges: this.allChargesAmount,
+			total: this.total,
+		};
 	},
 };
 
@@ -86,27 +88,26 @@ $(() => {
 			const currentGSTRate =
 				data.result.records[data.result.records.length - 1].tax_rate;
 			// set app with latest gst rate
-			app.setGSTRate(currentGSTRate);
+			app.setGstRate(currentGSTRate);
 
 			// display gst and service charge rate
-			$('#gst-rate').text(app.getGSTRate());
-			$('#svc-rate').text(app.getServiceCharge());
-
-			// get checkbox values
+			$('#gst-rate').text(app.getRates().gst);
+			$('#svc-rate').text(app.getRates().svc);
 
 			// calculate event
 			$('#calculate').on('click', () => {
+				// set amount in app object
 				if ($('#amount').val()) app.setAmount($('#amount').val());
+
+				// get checkbox values
 				const $isGstChecked = $('#gst').is(':checked');
 				const $isSvcChecked = $('#svc').is(':checked');
 
+				// calculate gst svc and total
 				app.calculate($isSvcChecked, $isGstChecked);
 
-				console.log(
-					app.getGstChargeAmount(),
-					app.getServiceChargeAmount(),
-					app.getTotal()
-				);
+				// reset calcuated values
+				app.resetCalculatedValues();
 			});
 		})
 		.catch((error) => {
