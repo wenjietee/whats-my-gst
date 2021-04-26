@@ -24,11 +24,22 @@ const app = {
 	serviceCharge: 10,
 
 	// methods
-	calculate() {
-		this.serviceChargeAmount = this.amount * (this.serviceCharge * PERCENT);
-		this.gstAmount =
-			(this.amount + this.serviceChargeAmount) * (this.gstRate * PERCENT);
+	calculate(isSvcChecked, isGstChecked) {
+		// calculate service charge if checked
+		if (isSvcChecked) {
+			this.serviceChargeAmount =
+				this.amount * (this.serviceCharge * PERCENT);
+		}
+		// calculate gst if checked
+		if (isGstChecked) {
+			this.gstAmount =
+				(this.amount + this.serviceChargeAmount) *
+				(this.gstRate * PERCENT);
+		}
+		// calculate total including all charges
 		this.total = this.amount + this.serviceChargeAmount + this.gstAmount;
+
+		// calculate charges only
 		this.allChargesAmount = this.gstAmount + this.serviceChargeAmount;
 	},
 
@@ -81,14 +92,24 @@ $(() => {
 			$('#gst-rate').text(app.getGSTRate());
 			$('#svc-rate').text(app.getServiceCharge());
 
+			// get checkbox values
+
 			// calculate event
 			$('#calculate').on('click', () => {
 				if ($('#amount').val()) app.setAmount($('#amount').val());
+				const $isGstChecked = $('#gst').is(':checked');
+				const $isSvcChecked = $('#svc').is(':checked');
+
+				app.calculate($isSvcChecked, $isGstChecked);
+
+				console.log(
+					app.getGstChargeAmount(),
+					app.getServiceChargeAmount(),
+					app.getTotal()
+				);
 			});
 		})
 		.catch((error) => {
 			console.log('Bad request.');
 		});
 });
-
-// to limit one decimal per entry
