@@ -13,27 +13,23 @@ const GST_RESOURCE_ID = '86841ed8-9b1e-4af4-9ecf-bc860519702c';
 //////////////
 
 const app = {
-	// display values
-	displayAmount: '',
 	// user values
 	amount: 0,
 	total: 0,
 	gstAmount: 0,
 	serviceChargeAmount: 0,
+	allChargesAmount: 0,
 	// gst and service charge rates
 	gstRate: undefined,
 	serviceCharge: 10,
 
 	// methods
-	calculateServiceCharge() {
+	calculate() {
 		this.serviceChargeAmount = this.amount * (this.serviceCharge * PERCENT);
-	},
-	calculateGST() {
 		this.gstAmount =
 			(this.amount + this.serviceChargeAmount) * (this.gstRate * PERCENT);
-	},
-	calculateTotal() {
 		this.total = this.amount + this.serviceChargeAmount + this.gstAmount;
+		this.allChargesAmount = this.gstAmount + this.serviceChargeAmount;
 	},
 
 	// setters
@@ -50,6 +46,18 @@ const app = {
 	},
 	getServiceCharge() {
 		return this.serviceCharge;
+	},
+	getTotal() {
+		return this.total;
+	},
+	getGstChargeAmount() {
+		return this.gstAmount;
+	},
+	getServiceChargeAmount() {
+		return this.serviceChargeAmount;
+	},
+	getAllChargesAmount() {
+		return this.allChargesAmount;
 	},
 };
 
@@ -74,7 +82,9 @@ $(() => {
 			$('#svc-rate').text(app.getServiceCharge());
 
 			// calculate event
-			$('#calculate').on('click', () => {});
+			$('#calculate').on('click', () => {
+				if ($('#amount').val()) app.setAmount($('#amount').val());
+			});
 		})
 		.catch((error) => {
 			console.log('Bad request.');
