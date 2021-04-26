@@ -64,12 +64,13 @@ const app = {
 	},
 
 	getAllValues() {
+		// returns values as strings in object
 		return {
-			amount: this.amount,
-			gst: this.gstAmount,
-			serviceCharge: this.serviceChargeAmount,
-			allCharges: this.allChargesAmount,
-			total: this.total,
+			amount: this.amount.toFixed(2),
+			gst: this.gstAmount.toFixed(2),
+			serviceCharge: this.serviceChargeAmount.toFixed(2),
+			allCharges: this.allChargesAmount.toFixed(2),
+			total: this.total.toFixed(2),
 		};
 	},
 };
@@ -106,6 +107,8 @@ $(() => {
 				// calculate gst svc and total
 				app.calculate($isSvcChecked, $isGstChecked);
 
+				// display calculated values
+				console.log(app.getAllValues());
 				// reset calcuated values
 				app.resetCalculatedValues();
 			});
