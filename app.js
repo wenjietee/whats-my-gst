@@ -68,8 +68,8 @@ const app = {
 		return {
 			amount: this.amount.toFixed(2),
 			gst: this.gstAmount.toFixed(2),
-			serviceCharge: this.serviceChargeAmount.toFixed(2),
-			allCharges: this.allChargesAmount.toFixed(2),
+			svc: this.serviceChargeAmount.toFixed(2),
+			all: this.allChargesAmount.toFixed(2),
 			total: this.total.toFixed(2),
 		};
 	},
@@ -86,10 +86,10 @@ $(() => {
 	})
 		.then((data) => {
 			// get current gst data
-			const currentGSTRate =
+			const currentGstRate =
 				data.result.records[data.result.records.length - 1].tax_rate;
 			// set app with latest gst rate
-			app.setGstRate(currentGSTRate);
+			app.setGstRate(currentGstRate);
 
 			// display gst and service charge rate
 			$('#gst-rate').text(app.getRates().gst);
@@ -108,7 +108,12 @@ $(() => {
 				app.calculate($isSvcChecked, $isGstChecked);
 
 				// display calculated values
-				console.log(app.getAllValues());
+				const values = app.getAllValues();
+				const $results = $('.result').toArray();
+				$results.forEach((result) => {
+					$(result).text(values[result.id]);
+				});
+
 				// reset calcuated values
 				app.resetCalculatedValues();
 			});
