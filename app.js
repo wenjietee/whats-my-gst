@@ -76,6 +76,18 @@ const app = {
 };
 
 //////////////
+// HELPERS
+//////////////
+
+const copyToClipboard = (button) => {
+	// get key for result object
+	let resultId = $(button).attr('id').split('-')[0];
+
+	// copy to clipboard
+	navigator.clipboard.writeText(app.getAllValues()[resultId]);
+};
+
+//////////////
 // APP START
 //////////////
 
@@ -92,8 +104,9 @@ $(() => {
 			app.setGstRate(currentGstRate);
 
 			// display gst and service charge rate
-			$('#gst-rate').text(app.getRates().gst);
-			$('#svc-rate').text(app.getRates().svc);
+			const rates = app.getRates();
+			$('#gst-rate').text(rates.gst);
+			$('#svc-rate').text(rates.svc);
 
 			// calculate event
 			$('#calculate').on('click', () => {
@@ -101,11 +114,14 @@ $(() => {
 				if ($('#amount').val()) app.setAmount($('#amount').val());
 
 				// get checkbox values
-				const $isGstChecked = $('#gst').is(':checked');
-				const $isSvcChecked = $('#svc').is(':checked');
+				let isGstChecked = $('#gst').is(':checked');
+				let isSvcChecked = $('#svc').is(':checked');
+
+				// reset calcuated values
+				app.resetCalculatedValues();
 
 				// calculate gst svc and total
-				app.calculate($isSvcChecked, $isGstChecked);
+				app.calculate(isSvcChecked, isGstChecked);
 
 				// display calculated values
 				const values = app.getAllValues();
@@ -113,9 +129,12 @@ $(() => {
 				$results.forEach((result) => {
 					$(result).text(values[result.id]);
 				});
+			});
 
-				// reset calcuated values
-				app.resetCalculatedValues();
+			// clipboard event
+			$('.clipboard').on('click', (e) => {
+				e.preventDefault();
+				copyToClipboard(e.target);
 			});
 		})
 		.catch((error) => {
