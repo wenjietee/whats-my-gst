@@ -135,6 +135,13 @@ $(() => {
 			$('.clipboard').on('click', (e) => {
 				e.preventDefault();
 				copyToClipboard(e.target);
+
+				// notify value copied
+				const $popover = $(e.target).next();
+				$popover.attr('hidden', false);
+				setTimeout(() => {
+					$popover.attr('hidden', true);
+				}, 1000);
 			});
 		})
 		.catch((error) => {
