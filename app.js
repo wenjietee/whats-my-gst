@@ -20,7 +20,7 @@ const app = {
 	serviceChargeAmount: 0,
 	allChargesAmount: 0,
 	// gst and service charge rates
-	gstRate: undefined,
+	gstRate: Number(localStorage.getItem('gstRate')),
 	serviceCharge: 10,
 
 	// methods
@@ -102,6 +102,9 @@ $(() => {
 				data.result.records[data.result.records.length - 1].tax_rate;
 			// set app with latest gst rate
 			app.setGstRate(currentGstRate);
+
+			// save local storage
+			localStorage.setItem('gstRate', currentGstRate);
 
 			// display gst and service charge rate
 			const rates = app.getRates();
