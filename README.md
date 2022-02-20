@@ -18,10 +18,6 @@ https://wenjietee.github.io/whats-my-gst/
 
 https://data.gov.sg/
 
-## Known Issues
-
 ---
 
-## Screenshots
-
----
+Copyright (C) 2022 Tee Wenjie
