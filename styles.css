@@ -68,6 +68,10 @@ body {
 	border-radius: 5px;
 }
 
+hr {
+	border-top: 2px dashed rgb(177, 177, 177);
+}
+
 /* Mobile */
 @media (max-width: 1000px) {
 	.columns > h5 {
@@ -100,5 +104,8 @@ body {
 
 	#calculate {
 		width: 100%;
+	}
+	hr {
+		margin-top: 50px;
 	}
 }
