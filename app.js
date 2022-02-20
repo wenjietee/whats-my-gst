@@ -111,7 +111,8 @@ $(() => {
 			// calculate event
 			$('#calculate').on('click', () => {
 				// set amount in app object
-				if ($('#amount').val()) app.setAmount($('#amount').val());
+				if ($('#amount-input').val())
+					app.setAmount($('#amount-input').val());
 
 				// get checkbox values
 				let isGstChecked = $('#gst').is(':checked');

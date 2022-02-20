@@ -1,6 +1,104 @@
+/* Font Styles */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Spartan&display=swap');
+
+/* Layout */
+.container {
+	padding: 40px;
+	margin: 0 auto;
+	margin-top: 60px;
+}
+.card-main {
+	margin-top: 0px;
+}
+.card-result {
+	height: 100px;
+}
+.amount-display {
+	margin-top: 30px;
+}
+
+/* Inputs */
+#amount-input {
+	width: 100%;
+	height: 50px;
+	font-size: 25px;
+}
+.checkbox {
+	width: 30px;
+	height: 30px;
+}
+
+/* Texts */
+body {
+	font-family: 'Spartan', sans-serif;
+}
+.title {
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;
+}
+.result {
+	font-weight: bold;
+}
+.rates {
+	font-size: 20px;
+}
+.columns > h5 {
+	margin-left: 6em;
+}
+
+/* Buttons */
+#calculate {
+	height: 50px;
+	margin-bottom: 2em;
+}
+.clipboard {
+	margin-left: 5em;
+	margin-top: 20px;
+	height: 45px;
+}
+.button-primary {
+	font-size: 1em;
+}
+
+/* Misc */
 .popover {
 	background-color: coral;
 	font-weight: bold;
 	padding: 6px;
 	border-radius: 5px;
+}
+
+/* Mobile */
+@media (max-width: 1000px) {
+	.columns > h5 {
+		margin-left: 0.5em;
+	}
+	.clipboard {
+		margin-left: 1em;
+	}
+}
+
+@media (max-width: 700px) {
+	.clipboard {
+		margin-left: 0.5em;
+		margin-top: 0px;
+	}
+	.columns > h5 {
+		font-size: 20px;
+		margin-left: 0em;
+	}
+	#calculate {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+@media (max-width: 600px) {
+	#amount-input {
+		width: 100%;
+	}
+
+	#calculate {
+		width: 100%;
+	}
 }

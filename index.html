@@ -22,91 +22,116 @@
 
 	<body>
 		<div class="container">
-			<h2 class="title">What's My GST?</h2>
-			<div class="row">
-				<label>Amount (SGD):</label>
-				<input class="twelve columns" id="amount" type="number" min="1" step="any" placeholder="$0.00"
-					inputmode="decimal" />
+			<div class="card-main">
+				<section class="input-display ">
+					<h1 class="title">What's My GST?</h1>
+
+					<div class="row">
+						<div class="twelve columns">
+							<label>Amount (SGD):</label>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="nine columns">
+							<input id="amount-input" type="number" min="1" step="any" placeholder="0.00"
+								inputmode="decimal" />
+						</div>
+
+						<div class="three columns">
+							<button class="button-primary" id="calculate">Calculate</button>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="three columns">
+							<label class="rates">
+								<span>GST (<span id="gst-rate"></span>%)</span>
+							</label>
+
+						</div>
+						<div class="three columns">
+							<input type="checkbox" class="checkbox" id="gst" name="gst" value="gst" checked />
+						</div>
+						<div class="four columns">
+							<label class="rates">
+								<span>Service Charge (<span id="svc-rate"></span>%)</span>
+							</label>
+
+						</div>
+						<div class="two columns ">
+							<input type="checkbox" class="checkbox" id="svc" name="svc" value="svc" checked />
+						</div>
+
+					</div>
+				</section>
+
+				<!-- Amount -->
+				<section class="amount-display">
+					<br>
+					<div class="row card-result">
+						<div class="six columns">
+							<h5>
+								Amount: <br><span class="result" id="amount">0.00</span>
+							</h5>
+
+						</div>
+						<div class="six columns">
+							<button class="button-primary clipboard" id="amount-c">Copy</button>
+							<span class="popover" hidden>Copied! 😊</span>
+						</div>
+					</div>
+
+					<!-- GST -->
+					<div class="row card-result">
+						<div class="six columns">
+							<h5>GST: <br><span class="result" id="gst">0.00</span></h5>
+						</div>
+						<div class="six columns">
+							<button class="button-primary clipboard" id="gst-c">Copy</button>
+							<span class="popover" hidden>Copied! 😊</span>
+						</div>
+					</div>
+
+					<!-- SVC -->
+					<div class="row card-result">
+						<div class="six columns">
+							<h5>
+								Service Charge: <br><span class="result" id="svc">0.00</span>
+							</h5>
+						</div>
+						<div class="six columns">
+							<button class="button-primary clipboard" id="svc-c">Copy</button>
+							<span class="popover" hidden>Copied! 😊</span>
+						</div>
+					</div>
+
+					<!-- All Charges -->
+					<div class="row card-result">
+						<div class="six columns">
+							<h5>
+								All Charges: <br><span class="result" id="all">0.00</span>
+							</h5>
+						</div>
+						<div class="six columns">
+							<button class="button-primary clipboard" id="all-c">Copy</button>
+							<span class="popover" hidden>Copied! 😊</span>
+						</div>
+					</div>
+
+					<!-- Total -->
+					<div class="row card-result">
+						<div class="six columns">
+							<h5>Total: <br><span class="result" id="total">0.00</span></h5>
+						</div>
+						<div class="six columns">
+							<button class="button-primary clipboard " id="total-c">Copy</button>
+							<span class="popover" hidden>Copied! 😊</span>
+						</div>
+					</div>
+
+				</section>
 			</div>
-			<div class="row">
-				<div class="six columns">
-					<label>
-						<input type="checkbox" id="gst" name="gst" value="gst" checked />
-						<span>GST (<span id="gst-rate"></span>%)</span>
-					</label>
-				</div>
-				<div class="six columns">
-					<label>
-						<input type="checkbox" id="svc" name="svc" value="svc" checked />
-						<span>Service Charge (<span id="svc-rate"></span>%)</span>
-					</label>
-				</div>
-			</div>
-			<button class="button-primary" id="calculate">Calculate</button>
-
-			<!-- Amount -->
-			<div class="row">
-				<div class="six columns">
-					<h5>
-						Amount: $<span class="result" id="amount">0.00</span>
-					</h5>
-
-				</div>
-				<div class="six columns">
-					<button class="button-primary clipboard" id="amount-c">Copy</button>
-					<span class="popover" hidden>Copied!</span>
-				</div>
-			</div>
-
-			<!-- GST -->
-			<div class="row">
-				<div class="six columns">
-					<h5>GST: $<span class="result" id="gst">0.00</span></h5>
-				</div>
-				<div class="six columns">
-					<button class="button-primary clipboard" id="gst-c">Copy</button>
-					<span class="popover" hidden>Copied!</span>
-				</div>
-			</div>
-
-			<!-- SVC -->
-			<div class="row">
-				<div class="six columns">
-					<h5>
-						Service Charge: $<span class="result" id="svc">0.00</span>
-					</h5>
-				</div>
-				<div class="six columns">
-					<button class="button-primary clipboard" id="svc-c">Copy</button>
-					<span class="popover" hidden>Copied!</span>
-				</div>
-			</div>
-
-			<!-- All Charges -->
-			<div class="row">
-				<div class="six columns">
-					<h5>
-						All Charges: $<span class="result" id="all">0.00</span>
-					</h5>
-				</div>
-				<div class="six columns">
-					<button class="button-primary clipboard" id="all-c">Copy</button>
-					<span class="popover" hidden>Copied!</span>
-				</div>
-			</div>
-
-			<!-- Total -->
-			<div class="row">
-				<div class="six columns">
-					<h5>Total: $<span class="result" id="total">0.00</span></h5>
-				</div>
-				<div class="six columns">
-					<button class="button-primary clipboard" id="total-c">Copy</button>
-					<span class="popover" hidden>Copied!</span>
-				</div>
-			</div>
-
-
 		</div>
 	</body>
 
