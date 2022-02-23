@@ -88,15 +88,6 @@ const copyToClipboard = (button) => {
 };
 
 //////////////
-// SVC WORKER
-//////////////
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('./serviceWorker.js').then(() => {
-		console.log('Service Worker has been registered');
-	});
-}
-
-//////////////
 // APP START
 //////////////
 
