@@ -7,19 +7,25 @@ const assets = [
 	'/scripts/jquery-3.5.1.min.js',
 	'/scripts/app.js',
 	'/favicon/favicon.ico',
+	'/registerServiceWorker.js',
 	'/manifest.json',
 ];
 
 self.addEventListener('install', (event) => {
 	event.waitUntil(
-		caches
-			.open('whatsMyGst')
-			.then(function (cache) {
-				return cache.addAll(assets);
-			})
-			.catch((error) => {
-				console.log(error);
-			})
+		caches.open('whatsMyGst').then((cache) => {
+			Promise.all(
+				assets.map((asset) => {
+					return cache.add(asset).catch((error) => {
+						console.log(
+							`Failed to add ${asset} to cache. Reason: ${String(
+								error
+							)}`
+						);
+					});
+				})
+			);
+		})
 	);
 });
 
