@@ -12,9 +12,14 @@ const assets = [
 
 self.addEventListener('install', (event) => {
 	event.waitUntil(
-		caches.open('whatsMyGst').then(function (cache) {
-			return cache.addAll(assets);
-		})
+		caches
+			.open('whatsMyGst')
+			.then(function (cache) {
+				return cache.addAll(assets);
+			})
+			.catch((error) => {
+				console.log(error);
+			})
 	);
 });
 
