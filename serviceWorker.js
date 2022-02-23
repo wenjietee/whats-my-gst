@@ -10,15 +10,15 @@ const assets = [
 	'/manifest.json',
 ];
 
-self.addEventListener('install', function (e) {
-	e.waitUntil(
+self.addEventListener('install', (event) => {
+	event.waitUntil(
 		caches.open('whatsMyGst').then(function (cache) {
 			return cache.addAll(assets);
 		})
 	);
 });
 
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
 	event.respondWith(
 		caches.match(event.request).then(function (response) {
 			return response || fetch(event.request);
