@@ -57,6 +57,7 @@ const app = {
 	setGstRate(value) {
 		if (value) {
 			this.gstRate = value;
+			localStorage.setItem('gstRate', value);
 		}
 	},
 
@@ -103,27 +104,26 @@ if ('serviceWorker' in navigator) {
 //////////////
 
 $(async () => {
+
+	// get gst from data.gov.sg
 	const apiResponse = { data: undefined };
 	try {
 		apiResponse.data = await $.ajax({
-			// get gst from data.gov.sg
+		
 			url: `https://data.gov.sg/api/action/datastore_search?resource_id=${GST_RESOURCE_ID}`,
 		});
 	} catch (error) {
-		console.log(error.message);
+		console.log(error.responseText);
 	}
 
 	// get current gst data
 	const currentGstRate =
-		apiResponse.data.result.records[
+		apiResponse.data?.result.records[
 			apiResponse.data.result.records.length - 1
 		].tax_rate;
 
 	// set app with latest gst rate
 	app.setGstRate(currentGstRate);
-
-	// save local storage
-	localStorage.setItem('gstRate', currentGstRate);
 
 	// display gst and service charge rate
 	const rates = app.getRates();
