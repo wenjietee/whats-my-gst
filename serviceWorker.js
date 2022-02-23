@@ -7,6 +7,7 @@ const assets = [
 	'/scripts/jquery-3.5.1.min.js',
 	'/scripts/app.js',
 	'/favicon/favicon.ico',
+	'/manifest.json',
 ];
 
 self.addEventListener('install', function (e) {

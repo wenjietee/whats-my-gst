@@ -11,6 +11,5 @@
 	"start_url": "/index.html",
 	"background_color": "#F5F5F5",
 	"display": "standalone",
-	"scope": "/app/",
 	"theme_color": "#F5F5F5"
 }
