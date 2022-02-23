@@ -55,7 +55,9 @@ const app = {
 		this.amount = Number(value);
 	},
 	setGstRate(value) {
-		this.gstRate = value;
+		if (value) {
+			this.gstRate = value;
+		}
 	},
 
 	// getters
@@ -100,64 +102,67 @@ if ('serviceWorker' in navigator) {
 // APP START
 //////////////
 
-$(() => {
-	$.ajax({
-		// get gst from data.gov.sg
-		url: `https://data.gov.sg/api/action/datastore_search?resource_id=${GST_RESOURCE_ID}`,
-	})
-		.then((data) => {
-			// get current gst data
-			const currentGstRate =
-				data.result.records[data.result.records.length - 1].tax_rate;
-			// set app with latest gst rate
-			app.setGstRate(currentGstRate);
-
-			// save local storage
-			localStorage.setItem('gstRate', currentGstRate);
-
-			// display gst and service charge rate
-			const rates = app.getRates();
-			$('#gst-rate').text(rates.gst);
-			$('#svc-rate').text(rates.svc);
-
-			// calculate event
-			$('#calculate').on('click', () => {
-				// set amount in app object
-				if ($('#amount-input').val())
-					app.setAmount($('#amount-input').val());
-
-				// get checkbox values
-				let isGstChecked = $('#gst').is(':checked');
-				let isSvcChecked = $('#svc').is(':checked');
-
-				// reset calcuated values
-				app.resetCalculatedValues();
-
-				// calculate gst svc and total
-				app.calculate(isSvcChecked, isGstChecked);
-
-				// display calculated values
-				const values = app.getAllValues();
-				const $results = $('.result').toArray();
-				$results.forEach((result) => {
-					$(result).text(values[result.id]);
-				});
-			});
-
-			// clipboard event
-			$('.clipboard').on('click', (e) => {
-				e.preventDefault();
-				copyToClipboard(e.target);
-
-				// notify value copied
-				const $popover = $(e.target).next();
-				$popover.attr('hidden', false);
-				setTimeout(() => {
-					$popover.attr('hidden', true);
-				}, 1000);
-			});
-		})
-		.catch((error) => {
-			console.log('Bad request.');
+$(async () => {
+	const apiResponse = { data: undefined };
+	try {
+		apiResponse.data = await $.ajax({
+			// get gst from data.gov.sg
+			url: `https://data.gov.sg/api/action/datastore_search?resource_id=${GST_RESOURCE_ID}`,
 		});
+	} catch (error) {
+		console.log(error.message);
+	}
+
+	// get current gst data
+	const currentGstRate =
+		apiResponse.data.result.records[
+			apiResponse.data.result.records.length - 1
+		].tax_rate;
+
+	// set app with latest gst rate
+	app.setGstRate(currentGstRate);
+
+	// save local storage
+	localStorage.setItem('gstRate', currentGstRate);
+
+	// display gst and service charge rate
+	const rates = app.getRates();
+	$('#gst-rate').text(rates.gst);
+	$('#svc-rate').text(rates.svc);
+
+	// calculate event
+	$('#calculate').on('click', () => {
+		// set amount in app object
+		if ($('#amount-input').val()) app.setAmount($('#amount-input').val());
+
+		// get checkbox values
+		let isGstChecked = $('#gst').is(':checked');
+		let isSvcChecked = $('#svc').is(':checked');
+
+		// reset calcuated values
+		app.resetCalculatedValues();
+
+		// calculate gst svc and total
+		app.calculate(isSvcChecked, isGstChecked);
+
+		// display calculated values
+		const values = app.getAllValues();
+		const $results = $('.result').toArray();
+		$results.forEach((result) => {
+			$(result).text(values[result.id]);
+		});
+	});
+
+	// clipboard event
+	$('.clipboard').on('click', (e) => {
+		e.preventDefault();
+		copyToClipboard(e.target);
+
+		// notify value copied
+		const $popover = $(e.target).next();
+		$popover.attr('hidden', false);
+		setTimeout(() => {
+			$popover.attr('hidden', true);
+		}, 1000);
+	});
 });
