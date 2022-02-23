@@ -1,6 +1,7 @@
 {
 	"short_name": "WhatsMyGst",
 	"name": "What's My GST",
+	"description": "A web app for calculating GST and service charge in Singapore.",
 	"icons": [
 		{
 			"src": "./favicon/favicon.ico",
