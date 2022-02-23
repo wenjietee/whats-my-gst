@@ -6,9 +6,19 @@
 			"src": "/favicon/favicon.ico",
 			"type": "image/icon",
 			"sizes": "48x48"
+		},
+		{
+			"src": "/favicon/icon192x192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "/favicon/icon512x512.png",
+			"type": "image/png",
+			"sizes": "512x512"
 		}
 	],
-	"start_url": "/index.html",
+	"start_url": ".",
 	"background_color": "#F5F5F5",
 	"display": "standalone",
 	"theme_color": "#F5F5F5"

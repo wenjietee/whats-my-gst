@@ -91,25 +91,14 @@ const copyToClipboard = (button) => {
 };
 
 //////////////
-// SVC WORKER
-//////////////
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('./serviceWorker.js').then(() => {
-		console.log('Service Worker has been registered');
-	});
-}
-
-//////////////
 // APP START
 //////////////
 
 $(async () => {
-
 	// get gst from data.gov.sg
 	const apiResponse = { data: undefined };
 	try {
 		apiResponse.data = await $.ajax({
-		
 			url: `https://data.gov.sg/api/action/datastore_search?resource_id=${GST_RESOURCE_ID}`,
 		});
 	} catch (error) {
