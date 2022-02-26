@@ -3,9 +3,9 @@
 
 /* Layout */
 .container {
-	padding: 40px;
+	padding: 20px;
 	margin: 0 auto;
-	margin-top: 60px;
+	margin-top: 30px;
 }
 .card-main {
 	margin-top: 0px;
@@ -79,7 +79,15 @@ footer {
 hr {
 	border-top: 2px dashed rgb(177, 177, 177);
 }
-
+.info {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+}
+.open {
+	font-size: 12px;
+	margin: 0 10px 0 10px;
+}
 /* Modals & Loaders */
 .modal,
 .loader {
