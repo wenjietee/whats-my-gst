@@ -76,7 +76,7 @@
 						</div>
 						<div class="six columns">
 							<button class="button-primary clipboard " id="total-c">Copy</button>
-							<span class="popover" hidden>Copied! 😊</span>
+							<span class="popover" hidden>Copied! 😃</span>
 						</div>
 					</div>
 
@@ -89,7 +89,7 @@
 						</div>
 						<div class="six columns">
 							<button class="button-primary clipboard" id="gst-c">Copy</button>
-							<span class="popover" hidden>Copied! 😊</span>
+							<span class="popover" hidden>Copied! 😃</span>
 						</div>
 					</div>
 
@@ -102,7 +102,7 @@
 						</div>
 						<div class="six columns">
 							<button class="button-primary clipboard" id="svc-c">Copy</button>
-							<span class="popover" hidden>Copied! 😊</span>
+							<span class="popover" hidden>Copied! 😃</span>
 						</div>
 					</div>
 
@@ -115,7 +115,7 @@
 						</div>
 						<div class="six columns">
 							<button class="button-primary clipboard" id="all-c">Copy</button>
-							<span class="popover" hidden>Copied! 😊</span>
+							<span class="popover" hidden>Copied! 😃</span>
 						</div>
 					</div>
 
@@ -124,6 +124,18 @@
 
 			<button class="button-primary open" id="open-about">About</button>
 			<button class="button-primary open" id="open-install">How to Install</button>
+
+			<!-- Loader -->
+			<div class="loader">
+				<div class="loader-container">
+					<div class="circle-container">
+						<div class="circle"></div>
+					</div>
+					<h5 class='loader-text'>Calculating...</h5>
+				</div>
+
+			</div>
+
 			<!-- Modals -->
 			<div class="modal" id="modal-about">
 				<div class="modal-content">
@@ -143,7 +155,6 @@
 					<button class="button-primary close">Close</button>
 				</div>
 			</div>
-
 			<div class="modal" id="modal-install">
 				<div class="modal-content">
 					<h5>How to install</h5>
@@ -168,15 +179,15 @@
 						</div>
 						<div class="twelve columns">
 							<h6>For Android</h6>
-						<ul>
-							<li>Open What's My GST in Chrome.</li>
-							<li>Tap the menu icon on the top right corner.</li>
-							<li>Tap "Add to Home Screen".</li>
-							<li>A preview will appear, tap "Add Automatically".</li>
-							<li>The web app will be added to your home screen.</li>
-						</ul>
+							<ul>
+								<li>Open What's My GST in Chrome.</li>
+								<li>Tap the menu icon on the top right corner.</li>
+								<li>Tap "Add to Home Screen".</li>
+								<li>A preview will appear, tap "Add Automatically".</li>
+								<li>The web app will be added to your home screen.</li>
+							</ul>
 						</div>
-						
+
 						<!-- Desktop -->
 						<div class="row" id="install-desktop">
 							<div class="twelve columns">
@@ -185,13 +196,12 @@
 									<li>Open What's My GST in any modern browser.</li>
 									<li>On the top right address bar, click install.</li>
 									<li>Tap "Add to Home Screen".</li>
-									<li>Enter a name, click "Add".</li>
 									<li>Click "Install" when prompted.</li>
 								</ul>
 							</div>
 						</div>
-					
 					</div>
+
 					<button class="button-primary close">Close</button>
 				</div>
 			</div>

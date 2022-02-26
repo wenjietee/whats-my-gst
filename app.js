@@ -137,25 +137,34 @@ $(async () => {
 
 	// calculate event
 	$('#calculate').on('click', () => {
-		// set amount in app object
-		if ($('#amount-input').val()) app.setAmount($('#amount-input').val());
+		// display loader
+		$('.loader').css('display', 'block');
 
-		// get checkbox values
-		let isGstChecked = $('#gst').is(':checked');
-		let isSvcChecked = $('#svc').is(':checked');
+		setTimeout(() => {
+			// set amount in app object
+			if ($('#amount-input').val())
+				app.setAmount($('#amount-input').val());
 
-		// reset calcuated values
-		app.resetCalculatedValues();
+			// get checkbox values
+			let isGstChecked = $('#gst').is(':checked');
+			let isSvcChecked = $('#svc').is(':checked');
 
-		// calculate gst svc and total
-		app.calculate(isSvcChecked, isGstChecked);
+			// reset calcuated values
+			app.resetCalculatedValues();
 
-		// display calculated values
-		const values = app.getAllValues();
-		const $results = $('.result').toArray();
-		$results.forEach((result) => {
-			$(result).text(values[result.id]);
-		});
+			// calculate gst svc and total
+			app.calculate(isSvcChecked, isGstChecked);
+
+			// display calculated values
+			const values = app.getAllValues();
+			const $results = $('.result').toArray();
+			$results.forEach((result) => {
+				$(result).text(values[result.id]);
+			});
+
+			// hide loader
+			$('.loader').css('display', 'none');
+		}, 800);
 	});
 
 	// clipboard event
