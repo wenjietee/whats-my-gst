@@ -90,6 +90,22 @@ const copyToClipboard = (button) => {
 	navigator.clipboard.writeText(app.getAllValues()[resultId]);
 };
 
+const openModal = (buttonVal) => {
+	if (buttonVal.includes('about')) {
+		$('#modal-about').css('display', 'block');
+		return;
+	}
+	if (buttonVal.includes('install')) {
+		$('#modal-install').css('display', 'block');
+		return;
+	}
+};
+
+const closeModal = () => {
+	$('#modal-about').css('display', 'none');
+	$('#modal-install').css('display', 'none');
+};
+
 //////////////
 // APP START
 //////////////
@@ -153,5 +169,16 @@ $(async () => {
 		setTimeout(() => {
 			$popover.attr('hidden', true);
 		}, 1000);
+	});
+
+	// modal events
+	$('.open').on('click', (e) => {
+		e.preventDefault();
+		openModal(e.target.id);
+	});
+
+	$('.close').on('click', (e) => {
+		e.preventDefault();
+		closeModal();
 	});
 });

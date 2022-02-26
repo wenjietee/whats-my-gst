@@ -77,6 +77,32 @@ hr {
 	border-top: 2px dashed rgb(177, 177, 177);
 }
 
+/* Modals */
+.modal {
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+}
+.modal-content {
+	background-color: #f0f0f0;
+	max-width: 450px;
+	max-height: 500px;
+	padding: 2em;
+	border-radius: 10px;
+	margin: 250px auto;
+	text-align: center;
+	user-select: none;
+	overflow: auto;
+}
+.modal-text {
+	text-align: left;
+}
+
 /* Mobile */
 @media (max-width: 1000px) {
 	.columns > h5 {
