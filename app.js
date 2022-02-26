@@ -90,6 +90,22 @@ const copyToClipboard = (button) => {
 	navigator.clipboard.writeText(app.getAllValues()[resultId]);
 };
 
+const openModal = (buttonVal) => {
+	if (buttonVal.includes('about')) {
+		$('#modal-about').css('display', 'block');
+		return;
+	}
+	if (buttonVal.includes('install')) {
+		$('#modal-install').css('display', 'block');
+		return;
+	}
+};
+
+const closeModal = () => {
+	$('#modal-about').css('display', 'none');
+	$('#modal-install').css('display', 'none');
+};
+
 //////////////
 // APP START
 //////////////
@@ -121,25 +137,34 @@ $(async () => {
 
 	// calculate event
 	$('#calculate').on('click', () => {
-		// set amount in app object
-		if ($('#amount-input').val()) app.setAmount($('#amount-input').val());
+		// display loader
+		$('.loader').css('display', 'block');
 
-		// get checkbox values
-		let isGstChecked = $('#gst').is(':checked');
-		let isSvcChecked = $('#svc').is(':checked');
+		setTimeout(() => {
+			// set amount in app object
+			if ($('#amount-input').val())
+				app.setAmount($('#amount-input').val());
 
-		// reset calcuated values
-		app.resetCalculatedValues();
+			// get checkbox values
+			let isGstChecked = $('#gst').is(':checked');
+			let isSvcChecked = $('#svc').is(':checked');
 
-		// calculate gst svc and total
-		app.calculate(isSvcChecked, isGstChecked);
+			// reset calcuated values
+			app.resetCalculatedValues();
 
-		// display calculated values
-		const values = app.getAllValues();
-		const $results = $('.result').toArray();
-		$results.forEach((result) => {
-			$(result).text(values[result.id]);
-		});
+			// calculate gst svc and total
+			app.calculate(isSvcChecked, isGstChecked);
+
+			// display calculated values
+			const values = app.getAllValues();
+			const $results = $('.result').toArray();
+			$results.forEach((result) => {
+				$(result).text(values[result.id]);
+			});
+
+			// hide loader
+			$('.loader').css('display', 'none');
+		}, 800);
 	});
 
 	// clipboard event
@@ -153,5 +178,16 @@ $(async () => {
 		setTimeout(() => {
 			$popover.attr('hidden', true);
 		}, 1000);
+	});
+
+	// modal events
+	$('.open').on('click', (e) => {
+		e.preventDefault();
+		openModal(e.target.id);
+	});
+
+	$('.close').on('click', (e) => {
+		e.preventDefault();
+		closeModal();
 	});
 });

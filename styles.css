@@ -3,9 +3,9 @@
 
 /* Layout */
 .container {
-	padding: 40px;
+	padding: 20px;
 	margin: 0 auto;
-	margin-top: 60px;
+	margin-top: 30px;
 }
 .card-main {
 	margin-top: 0px;
@@ -32,6 +32,7 @@
 body {
 	font-family: 'Spartan', sans-serif;
 	font-size: 12px;
+	background: #ffffff;
 }
 footer {
 	text-align: center;
@@ -64,17 +65,95 @@ footer {
 }
 .button-primary {
 	font-size: 1em;
+	border: none;
 }
 
 /* Misc */
 .popover {
-	background-color: coral;
+	background-color: rgb(221, 221, 221);
 	font-weight: bold;
-	padding: 6px;
+	font-size: 15px;
+	padding: 15px;
 	border-radius: 5px;
 }
 hr {
 	border-top: 2px dashed rgb(177, 177, 177);
+}
+.info {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+}
+.open {
+	font-size: 12px;
+	margin: 0 10px 0 10px;
+}
+/* Modals & Loaders */
+.modal,
+.loader {
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+}
+.modal-content,
+.loader-container {
+	background-color: #f0f0f0;
+	max-width: 450px;
+	max-height: 500px;
+	padding: 2em;
+	border-radius: 10px;
+	margin: 250px auto;
+	text-align: center;
+	user-select: none;
+	overflow: auto;
+}
+.modal-text {
+	text-align: left;
+}
+
+/* Loader elements */
+.loader-text {
+	margin-left: 20px;
+	margin-top: 30px;
+}
+.circle-container {
+	display: flex;
+	justify-content: center;
+	height: 50px;
+	padding-top: 20px;
+}
+.circle {
+	border: 10px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 10px solid #3498db;
+	width: 50px;
+	height: 50px;
+	-webkit-animation: spin 300ms linear infinite;
+	animation: spin 300ms linear infinite;
+}
+
+/* Animation */
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 /* Mobile */
