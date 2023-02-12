@@ -128,7 +128,7 @@ $(async () => {
 		].tax_rate;
 
 	// set app with latest gst rate
-	app.setGstRate(currentGstRate);
+	app.setGstRate(currentGstRate === "8"? currentGstRate : 8);
 
 	// display gst and service charge rate
 	const rates = app.getRates();
