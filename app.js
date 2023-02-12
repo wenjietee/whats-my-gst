@@ -120,7 +120,16 @@ $(async () => {
 	} catch (error) {
 		console.log(error.responseText);
 	}
-
+	
+	// handle new GST rates
+	// 2023 GST Rate
+	let newGstRate = 8;
+	
+	// 2024 GST Rate
+	if(new Date().getFullYear() === 2024){
+		newGstRate = 9;
+	}
+	
 	// get current gst data
 	const currentGstRate =
 		apiResponse.data?.result.records[
@@ -128,7 +137,7 @@ $(async () => {
 		].tax_rate;
 
 	// set app with latest gst rate
-	app.setGstRate(currentGstRate === "8"? currentGstRate : 8);
+	app.setGstRate(Number(currentGstRate) === newGstRate? currentGstRate : newGstRate);
 
 	// display gst and service charge rate
 	const rates = app.getRates();
