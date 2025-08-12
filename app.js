@@ -122,13 +122,7 @@ $(async () => {
 	}
 	
 	// handle new GST rates
-	// 2023 GST Rate
-	let newGstRate = 8;
-	
-	// 2024 GST Rate
-	if(new Date().getFullYear() >= 2024){
-		newGstRate = 9;
-	}
+	let newGstRate = 9;
 	
 	// get current gst data
 	const currentGstRate =
